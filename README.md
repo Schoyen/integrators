@@ -1,2 +1,1 @@
-# crank-nicolson
-Just your friendly neighborhood Crank-Nicolson solver in Jax
+# Crank-Nicolson solver for ODE's and PDE's
