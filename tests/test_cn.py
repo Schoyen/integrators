@@ -2,7 +2,7 @@ import unittest
 import jax
 import jax.numpy as jnp
 
-from crank_nicolson import CrankNicolson
+from integrators import CrankNicolson
 
 
 @jax.jit

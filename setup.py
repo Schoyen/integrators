@@ -5,7 +5,7 @@ extras_require = {
 }
 
 setup(
-    name="crank-nicolson",
+    name="integrators",
     version="0.0.1",
     packages=find_packages(),
     extras_require=extras_require,
