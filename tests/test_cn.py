@@ -15,10 +15,9 @@ class ExpODETest(unittest.TestCase):
         dt = 0.01
         t0 = 0
         y0 = jnp.array(1)
-        tol = 1e-7
         analytical_y = lambda t: jnp.exp(-t)
 
-        cn = CrankNicolson(rhs, y0, t0, tol)
+        cn = CrankNicolson(rhs, y0, t0)
 
         y = [y0]
         t = [t0]
