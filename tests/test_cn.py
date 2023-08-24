@@ -2,7 +2,7 @@ import unittest
 import jax
 import jax.numpy as jnp
 
-from integrators import CrankNicolson
+from integrators import get_crank_nicolson_solver
 
 
 @jax.jit
@@ -13,18 +13,18 @@ def rhs(t, y):
 class ExpODETest(unittest.TestCase):
     def test_exp_ode(self):
         dt = 0.01
-        t0 = 0
-        y0 = jnp.array(1)
+        t = 0
+        y = jnp.array(1)
         analytical_y = lambda t: jnp.exp(-t)
 
-        cn = CrankNicolson(rhs, y0, t0)
+        cn = get_crank_nicolson_solver(rhs, dt)
 
-        y = [y0]
-        t = [t0]
+        y_list = [y]
+        t_list = [t]
 
         for i in range(10):
-            cn.integrate(cn.t + dt)
-            y.append(cn.y)
-            t.append(cn.t)
+            t, y = cn(t + dt, y)
+            y_list.append(y)
+            t_list.append(t)
 
-        assert jnp.allclose(jnp.array(y), analytical_y(jnp.array(t)))
+        assert jnp.allclose(jnp.array(y_list), analytical_y(jnp.array(t_list)))
