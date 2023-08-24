@@ -11,7 +11,7 @@ def get_runge_kutta_4_solver(rhs, dt):
 
         y = y + 1 / 6 * (k1 + 2 * k2 + 2 * k3 + k4) * dt
 
-        return t, y
+        return t + dt, y
 
     return integrate
 
@@ -25,6 +25,6 @@ def get_crank_nicolson_solver(rhs, dt, solver=None):
         A = lambda c, t=t, dt=dt, rhs=rhs: c - dt / 2 * rhs(t + dt / 2, c)
         b = y + dt / 2 * rhs(t + dt / 2, y)
 
-        return t, solver(A, b)[0]
+        return t + dt, solver(A, b)[0]
 
     return integrate

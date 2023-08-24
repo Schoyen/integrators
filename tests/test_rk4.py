@@ -23,7 +23,12 @@ class ExpODETest(unittest.TestCase):
         t_list = [t]
 
         for i in range(10):
-            t, y = rk4(t + dt, y)
+            t_prev = t
+
+            t, y = rk4(t, y)
+
+            assert abs(t - t_prev - dt) < dt * 0.001
+
             y_list.append(y)
             t_list.append(t)
 
