@@ -7,6 +7,8 @@ Time-stepping is done via the class-method `integrate` accepting a new time-poin
 ## Solvers
 The ever-relevant Runge-Kutta 4 integrator.
 
+The Dormand-Prince integrator.
+
 The bare-bones Crank-Nicolson solver using conjugate-gradient iterations to solve the implicit equations with JAX.
 This means that the method only supports symmetric/hermitian operators for the right-hand side.
 The solver takes in an extra argument `tol` adjusting the convergence threshold for the conjugate-gradient iterations.
