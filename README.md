@@ -1,17 +1,15 @@
 # Integrators
 
 This library includes bare-bones implementations of some first-order ODE integrators.
-The integrators are small classes with a setup accepting a right-hand side function `rhs`, an initial value `y0`, an initial time-step `t0`, and possibly extra arguments depending on the integrator.
-Time-stepping is done via the class-method `integrate` accepting a new time-point `t`.
+The integrators are small functions with a setup accepting a right-hand side function `rhs`, a time step `dt`, and possibly extra arguments depending on the integrator.
+Time-stepping is done by calling the returned function, `integrate`, accepting a new time-point `t` and the current value `y`.
 
 ## Solvers
 The ever-relevant Runge-Kutta 4 integrator.
 
 The Dormand-Prince integrator.
 
-The bare-bones Crank-Nicolson solver using conjugate-gradient iterations to solve the implicit equations with JAX.
-This means that the method only supports symmetric/hermitian operators for the right-hand side.
-The solver takes in an extra argument `tol` adjusting the convergence threshold for the conjugate-gradient iterations.
+The bare-bones Crank-Nicolson solver using conjugate-gradient iterations (by default) to solve the implicit equations with JAX.
 
 
 ## Installation
