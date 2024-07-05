@@ -75,13 +75,15 @@ def get_dormand_prince_solver(rhs, dt):
 
 def get_crank_nicolson_solver(rhs, dt, solver=None):
     if solver is None:
-        solver = jax.jit(jax.scipy.sparse.linalg.cg, static_argnums=(0,))
+        solver = lambda A, b: jax.jit(jax.scipy.sparse.linalg.cg, static_argnums=(0,))(
+            A, b
+        )[0]
 
     @jax.jit
     def integrate(t, y, dt=dt, rhs=rhs, solver=solver):
         A = lambda c, t=t, dt=dt, rhs=rhs: c - dt / 2 * rhs(t + dt / 2, c)
         b = y + dt / 2 * rhs(t + dt / 2, y)
 
-        return t + dt, solver(A, b)[0]
+        return t + dt, solver(A, b)
 
     return integrate
